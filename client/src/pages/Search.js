@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Header } from 'semantic-ui-react'
 import { Title } from '../components/Title'
 import { SearchForm } from '../components/SearchForm'
+import { ResultContainer} from '../components/ResultContainer'
 
 export const Search = () => {
 
@@ -17,6 +18,7 @@ export const Search = () => {
             </Container>
         </div>
         < SearchForm />
+        < ResultContainer c1="Add to my Shelf" c2="Take off my Shelf"/>
         </>
         
     )

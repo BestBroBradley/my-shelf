@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
 
-export const Result = (props) => {
+export const FinishedCard = (props) => {
     return (
             <Card style={{width: "60%"}}>
                 <Card.Content>
@@ -10,7 +10,7 @@ export const Result = (props) => {
                         size='mini'
                         src='/images/avatar/large/steve.jpg'
                     />
-                    <Card.Header>Harry Potter and the Sorcerer's Stone</Card.Header>
+                    <Card.Header>Harry Potter</Card.Header>
                     <Card.Meta>J.K. Rowling</Card.Meta>
                     <Card.Description>
                         A young boy discovers that he's a wizard.
@@ -18,11 +18,8 @@ export const Result = (props) => {
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                        <Button basic color='green'>
-                            {props.c1}
-                        </Button>
-                        <Button basic color='red'>
-                            {props.c2}
+                        <Button basic color='yellow'>
+                            Delete this Title
                         </Button>
                     </div>
                 </Card.Content>
