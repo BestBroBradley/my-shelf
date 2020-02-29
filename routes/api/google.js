@@ -3,6 +3,6 @@ const googleController = require("../../controllers/googleController");
 
 // Matches with "/api/books"
 router.route("/:type/:term")
-  .get(booksController.findAll)
+  .get(googleController.findAll)
 
 module.exports = router;
