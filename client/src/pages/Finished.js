@@ -13,10 +13,7 @@ export const Finished = () => {
                     Look at you go, you voracious beast, you!
                 </p>
                 <h3>
-                    You've checked __ books off your list!
-                </h3>
-                <h3>
-                    You've read __ pages!
+                    You've checked __ books off your list! | You've read __ pages!
                 </h3>
             </Container>
         </div>

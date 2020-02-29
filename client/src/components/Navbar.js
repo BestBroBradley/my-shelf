@@ -14,6 +14,7 @@ export const Navbar = () => {
             <Menu pointing secondary>
                 <Link to="/bookshelf">
                 <Menu.Item
+                    as="div"
                     name='My Bookshelf'
                     active={activeTab === 'bookshelf'}
                     onClick={() => handleItemClick('bookshelf')}
@@ -21,6 +22,7 @@ export const Navbar = () => {
                 </Link>
                 <Link to="/search">
                 <Menu.Item
+                    as="div"
                     name='Search'
                     active={activeTab === 'search'}
                     onClick={() => handleItemClick('search')}
@@ -28,6 +30,7 @@ export const Navbar = () => {
                 </Link>
                 <Link to="/read">
                 <Menu.Item
+                    as="div"
                     name='Finished Titles'
                     active={activeTab === 'read'}
                     onClick={() => handleItemClick('read')}
@@ -36,6 +39,7 @@ export const Navbar = () => {
                 <Menu.Menu position='right'>
                     <Link to="/bookshelf">
                     <Icon style={{marginTop: "8px", marginRight: "8px"}}
+                    onClick={() => handleItemClick('bookshelf')}
                     size='large'
                     name='home'
                     />
