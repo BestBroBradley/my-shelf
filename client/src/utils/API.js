@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from "axios"
 
 const apiKey = "AIzaSyDCaM1c8Cy5qGZXdt0fdcTdmyrtS39_2d4"
 let queryURL = ""
@@ -21,7 +21,7 @@ export default {
         }
     },
     getUserBooks: function () {
-            return axios.get("/api/books")
+            return axios.get("/api/books/")
     },
     updateBook: function (id) {
             return axios.get("/api/books/" + id)
