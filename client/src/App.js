@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { SearchContext } from './utils/SearchContext'
+import { BookshelfContext } from './utils/BookshelfContext'
 import API from './utils/API'
 import { Navbar } from "./components/Navbar"
 import { Search } from "./pages/Search"
@@ -13,6 +14,54 @@ function App() {
     type: "Title",
     results: []
   })
+
+  const [library, updateLibrary] = useState({
+    books: []
+  })
+
+  useEffect(() => {
+    loadBooks()
+  }, [])
+
+  const addToLibrary = (data) => {
+    API.addBook(data)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  const loadBooks = () => {
+    API.getUserBooks()
+    .then(res => {
+      updateLibrary(res.data)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  const removeFromLibrary = (id) => {
+    API.deleteBook(id)
+    .then(res => {
+      loadBooks()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  const markAsRead = (id) => {
+    API.updateBook(id)
+    .then(res => {
+      loadBooks()
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
 
   const handleInputChange = ((event) => {
     const { value } = event.target
@@ -52,6 +101,7 @@ function App() {
     <Router>
       <Navbar />
       <SearchContext.Provider value={{search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch} }>
+      <BookshelfContext.Provider value={{library, addToLibrary, removeFromLibrary, markAsRead, removeFromLibrary, loadBooks } }>
         <Switch>
           <Route exact path="/bookshelf">
             <Bookshelf />
@@ -63,6 +113,7 @@ function App() {
             <Search />
           </Route>
         </Switch>
+      </BookshelfContext.Provider>
       </SearchContext.Provider>
     </Router>
   );

@@ -19,4 +19,17 @@ export default {
             default:
                 break;
         }
-    }}
+    },
+    getUserBooks: function () {
+            return axios.get("/api/books")
+    },
+    updateBook: function (id) {
+            return axios.get("/api/books/" + id)
+    },
+    deleteBook: function (id) {
+            return axios.get("/api/books/" + id)
+    },
+    addBook: function (book) {
+            return axios.post("/api/books", book)
+    }
+}

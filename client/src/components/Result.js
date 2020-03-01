@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
+import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const Result = (props) => {
     const { title, id, pages, authors, summary, categories } = props.data[0]
+    const { addToLibrary } = useContext(BookshelfContext)
+
+    const add = () => {
+        const newBook = 
+        {title, id, pageCount: pages, author: authors, synopsis: summary, isRead: false, categories }
+        console.log(newBook)
+        addToLibrary(newBook)
+    }
 
     return (
             <Card style={{width: "60%"}}>
@@ -20,7 +29,7 @@ export const Result = (props) => {
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                        <Button basic color='green'>
+                        <Button basic color='green' onClick={add}>
                             {props.c1}
                         </Button>
                         <Button basic color='red'>
