@@ -8,7 +8,7 @@ export const ResultContainer = (props) => {
     const results = search.results
     return (
     <Card.Group style={{justifyContent: "center"}}>
-        {results.map(result => <Result c1={props.c1} c2={props.c2}/>)}
+        {results.map(result => <Result c1={props.c1} c2={props.c2} data={result}/>)}
     </Card.Group>
     )
 }

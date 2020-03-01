@@ -2,18 +2,20 @@ import React from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
 
 export const Result = (props) => {
+    const { title, pages, authors, summary, categories } = props.data[0]
+
     return (
             <Card style={{width: "60%"}}>
                 <Card.Content>
-                    <Image
+                    {/* <Image
                         floated='right'
                         size='mini'
-                        src='/images/avatar/large/steve.jpg'
-                    />
-                    <Card.Header>Harry Potter and the Sorcerer's Stone</Card.Header>
-                    <Card.Meta>J.K. Rowling</Card.Meta>
+                        src='#'
+                    /> */}
+                    <Card.Header>{title}</Card.Header>
+                    <Card.Meta>{authors[0]} | {categories ? categories : "No genre available."}</Card.Meta>
                     <Card.Description>
-                        A young boy discovers that he's a wizard.
+                        {summary ? summary : "No summary available for this work."}
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>

@@ -4,8 +4,7 @@ import { SearchContext } from "../utils/SearchContext"
 
 export const SearchForm = () => {
 
-    console.log(useContext(SearchContext))
-    const { term, type, handleSelectorChange, handleInputChange, handleSubmit } = useContext(SearchContext)
+    const { handleSelectorChange, handleInputChange, handleSubmit } = useContext(SearchContext)
     
     const options = [
         { key: 'title', data: 'title', text: 'Title', value: 'title'},

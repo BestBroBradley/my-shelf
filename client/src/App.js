@@ -32,11 +32,13 @@ function App() {
   const googleSearch = (query => {
     API.search(query)
       .then(res => {
+        console.log(res)
         const results = res.data.items.map(item => [{
+          id: item.id,
           title: item.volumeInfo.title,
           authors: item.volumeInfo.authors,
           pages: item.volumeInfo.pageCount,
-          image: item.volumeInfo.imageLinks,
+          // image: item.volumeInfo.imageLinks.smallThumbnail,
           summary: item.volumeInfo.description,
           categories: item.volumeInfo.categories
         }])
