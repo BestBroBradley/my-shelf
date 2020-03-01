@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
 
 export const Result = (props) => {
-    const { title, pages, authors, summary, categories } = props.data[0]
+    const { title, id, pages, authors, summary, categories } = props.data[0]
 
     return (
             <Card style={{width: "60%"}}>
