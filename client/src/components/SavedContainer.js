@@ -9,7 +9,7 @@ export const SavedContainer = () => {
         if ((book.isRead) === false) {
             return book
         }
-    })).sort(title)
+    }))
 
     return (
         <Card.Group style={{ justifyContent: "center" }}>

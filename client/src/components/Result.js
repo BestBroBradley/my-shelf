@@ -4,9 +4,21 @@ import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const Result = (props) => {
     const { title, id, pages, authors, summary, categories } = props.data[0]
-    const { addToLibrary } = useContext(BookshelfContext)
+    const { addToLibrary, library } = useContext(BookshelfContext)
+    
+    function check (event) {
+        
+    }
 
-    const add = () => {
+
+    function add (event) {
+        const { books } = library
+        for (let i=0; i < books.length; i++) {
+            if ((books[i].hasOwnProperty("title")) && (books[i].title === title)) {
+                event.target.textContent = "Already in library"
+                return
+            }}
+        event.target.textContent = "Added to Library"
         const newBook = 
         {title, id, pageCount: pages, author: authors, synopsis: summary, isRead: false, categories }
         addToLibrary(newBook)
@@ -15,20 +27,15 @@ export const Result = (props) => {
     return (
             <Card style={{width: "60%"}}>
                 <Card.Content>
-                    {/* <Image
-                        floated='right'
-                        size='mini'
-                        src='#'
-                    /> */}
                     <Card.Header>{title}</Card.Header>
-                    <Card.Meta>{authors[0]} | {categories ? categories : "No genre available."}</Card.Meta>
+                    <Card.Meta>{ authors ? authors[0] : "No author available"} | {categories ? categories : "No genre available."}</Card.Meta>
                     <Card.Description>
                         {summary ? summary : "No summary available for this work."}
                     </Card.Description>
                 </Card.Content>
                 <Card.Content extra>
                     <div className='ui two buttons'>
-                        <Button basic color='green' onClick={add}>
+                        <Button id="addBook" basic color='green' onClick={add}>
                             {props.c1}
                         </Button>
                     </div>
