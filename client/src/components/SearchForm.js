@@ -4,7 +4,7 @@ import { SearchContext } from "../utils/SearchContext"
 
 export const SearchForm = () => {
 
-    const { term, handleSelectorChange, handleInputChange, handleSubmit } = useContext(SearchContext)
+    const { handleSelectorChange, handleInputChange, handleSubmit } = useContext(SearchContext)
     
     const options = [
         { key: 'title', data: 'title', text: 'Title', value: 'title'},
@@ -15,8 +15,8 @@ export const SearchForm = () => {
     return (
         <div style={{ textAlign: "center", margin: 50 }}>
             <form id="submit-form" onSubmit={handleSubmit} >
-                <Input type='text' placeholder='Search...' action>
-                    <input onChange={handleInputChange} />
+                <Input className="searchInp" type='text' placeholder='Search...' action>
+                    <input className="searchInp" onChange={handleInputChange} />
                     <Select onChange={handleSelectorChange} compact options={options} defaultValue='title' id="selectBtn" />
                     <Button type='submit'>Search</Button>
                 </Input>

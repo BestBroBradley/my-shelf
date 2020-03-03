@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const apiKey = "AIzaSyDCaM1c8Cy5qGZXdt0fdcTdmyrtS39_2d4"
+const apiKey = process.env.REACT_APP_apiKey
+
 let queryURL = ""
 
 export default {
@@ -24,12 +25,16 @@ export default {
             return axios.get("/api/books/")
     },
     updateBook: function (id) {
-            return axios.get("/api/books/" + id)
+            return axios.put("/api/books/" + id)
     },
     deleteBook: function (id) {
-            return axios.get("/api/books/" + id)
+            return axios.delete("/api/books/" + id)
     },
     addBook: function (book) {
             return axios.post("/api/books", book)
+    },
+    deleteRead: function () {
+            console.log(`delete`)
+            return axios.delete("/api/books")
     }
 }

@@ -6,7 +6,9 @@ module.exports = {
     findAll: function(req, res) {
       Book
         .find()
-        .then(res => res.json())
+        .then(data => {
+          res.json(data)
+        })
         .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
@@ -16,24 +18,31 @@ module.exports = {
         .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
-      console.log(req.body)
       Book
         .create(req.body)
-        .then(dbModel => res.json(dbModel))
+        .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
       Book
-        .findOneAndUpdate({ _id: req.params.id }, req.body)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+        .findOneAndUpdate({_id: req.params.id}, {isRead: true})
+        .then(data => res.json(data))
+        .catch(err => console.log(err));
     },
     remove: function(req, res) {
       Book
         .findById({ _id: req.params.id })
-        .then(dbModel => dbModel.remove())
-        .then(dbModel => res.json(dbModel))
+        .then(book => book.remove())
+        .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
+    },
+    clear: function(req, res) {
+      Book
+        .deleteMany({isRead: true})
+        .then(data => {
+          console.log(data)
+          res.json(data)})
+        .catch(err => console.log(err))
     }
   };
   

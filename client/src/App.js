@@ -16,12 +16,23 @@ function App() {
   })
 
   const [library, updateLibrary] = useState({
-    books: []
+    books: [],
+    totalPages: 0
   })
 
   useEffect(() => {
     loadBooks()
   }, [])
+
+  const getCount = () => {
+    let totalPages = 0
+    const { books } = library
+    for (const book of books) {
+      if (book.isRead === true)
+      { totalPages += books.pageCount }
+    }
+    updateLibrary({...library, totalPages: totalPages })
+  }
 
   const addToLibrary = (data) => {
     API.addBook(data)
@@ -36,7 +47,7 @@ function App() {
   const loadBooks = () => {
     API.getUserBooks()
       .then(res => {
-        updateLibrary(res.data)
+        updateLibrary({books: res.data})
       })
       .catch(err => {
         console.log(err)
@@ -51,6 +62,16 @@ function App() {
       .catch(err => {
         console.log(err)
       })
+  }
+
+  const emptyFinished = () => {
+    API.deleteRead()
+    .then(res => {
+      loadBooks()
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   const markAsRead = (id) => {
@@ -71,6 +92,7 @@ function App() {
   const handleSubmit = (event => {
     event.preventDefault()
     googleSearch(search)
+    document.getElementById("submit-form").reset()
   })
 
   const handleSelectorChange = (event => {
@@ -87,7 +109,6 @@ function App() {
           title: item.volumeInfo.title,
           authors: item.volumeInfo.authors,
           pages: item.volumeInfo.pageCount,
-          // image: item.volumeInfo.imageLinks.smallThumbnail,
           summary: item.volumeInfo.description,
           categories: item.volumeInfo.categories
         }])
@@ -102,7 +123,7 @@ function App() {
       <Router>
       <Navbar />
       <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
-        <BookshelfContext.Provider value={{ library, addToLibrary, removeFromLibrary, markAsRead, loadBooks }}>
+        <BookshelfContext.Provider value={{ library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
           <Switch>
             <Route exact path="/bookshelf">
               <Bookshelf />
