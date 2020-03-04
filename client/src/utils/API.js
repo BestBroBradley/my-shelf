@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const apiKey = process.env.REACT_APP_apiKey
+const APIKEY = process.env.REACT_APP_APIKEY
 
 let queryURL = ""
 
@@ -9,13 +9,13 @@ export default {
         const { type, term } = state
         switch (type) {
             case "Title":
-                    queryURL = `https://www.googleapis.com/books/v1/volumes?q=${term}&key=${apiKey}`
+                    queryURL = `https://www.googleapis.com/books/v1/volumes?q=${term}&key=${APIKEY}`
                     return axios.get(queryURL)
             case "Author":
-                    queryURL = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${term}&key=${apiKey}`
+                    queryURL = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${term}&key=${APIKEY}`
                     return axios.get(queryURL)
             case "Subject":
-                    queryURL = `https://www.googleapis.com/books/v1/volumes?q=subject:${term}s&key=${apiKey}`
+                    queryURL = `https://www.googleapis.com/books/v1/volumes?q=subject:${term}s&key=${APIKEY}`
                     return axios.get(queryURL)
             default:
                 break;
