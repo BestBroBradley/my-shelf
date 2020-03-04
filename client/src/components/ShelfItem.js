@@ -20,6 +20,7 @@ export const ShelfItem = (props) => {
     return (
             <Card style={{width: "60%"}}>
                 <Card.Content>
+                    
                     <Card.Header>{title}</Card.Header>
                     <Card.Meta>{author[0]} | {categories ? categories : "No genre available."}</Card.Meta>
                     <Card.Description>
