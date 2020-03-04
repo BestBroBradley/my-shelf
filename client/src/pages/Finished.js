@@ -29,10 +29,10 @@ export const Finished = () => {
                     header="Looks like you haven't finished any books yet."
                     content="When you finish books in your bookshelf, they'll show up here."
                 />) : (null)}
-            </div>
-            <Card.Group style={{ justifyContent: "center" }}>
+            <Card.Group style={{ marginTop: 40, justifyContent: "center" }}>
                 {finishedBooks.map(book => < FinishedCard key={book._id} data={book}/>)}
             </Card.Group>
+            </div>
             {(finishedBooks.length !== 0) ? (<div style={{ margin: 20, textAlign: "center" }}>
                 <Button size='huge' basic color='red' onClick={emptyFinished}>
                     Clear this List

@@ -25,7 +25,7 @@ export const Result = (props) => {
     }
 
     return (
-            <Card style={{width: "60%"}}>
+            <Card className="item" style={{width: "70%"}}>
                 <Card.Content>
                     <Card.Header>{title}</Card.Header>
                     <Card.Meta>{ authors ? authors[0] : "No author available"} | {categories ? categories : "No genre available."}</Card.Meta>

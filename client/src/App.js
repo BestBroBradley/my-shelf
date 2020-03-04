@@ -7,6 +7,7 @@ import { Navbar } from "./components/Navbar"
 import { Search } from "./pages/Search"
 import { Bookshelf } from "./pages/Bookshelf"
 import { Finished } from "./pages/Finished"
+import { NoMatch } from "./pages/NoMatch"
 
 function App() {
   const [search, updateSearch] = useState({
@@ -125,7 +126,7 @@ function App() {
       <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
         <BookshelfContext.Provider value={{ library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
           <Switch>
-            <Route exact path="/bookshelf">
+            <Route exact path="/">
               <Bookshelf />
             </Route>
             <Route exact path="/read">
@@ -133,6 +134,9 @@ function App() {
             </Route>
             <Route exact path="/search">
               <Search />
+            </Route>
+            <Route exact path="*">
+              <NoMatch />
             </Route>
           </Switch>
         </BookshelfContext.Provider>

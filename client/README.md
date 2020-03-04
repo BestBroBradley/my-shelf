@@ -1,16 +1,36 @@
+# My Shelf
+
+This is an application that allows a book-loving user to search the Google Books API, save books that they're interested in reading, and then mark those books as complete once they've read them.
+
+My Shelf is an MVC app that has a complete backend and the ability to do full CRUD operations within the database.
+
+![Bookshelf](%PUBLIC_URL%/images/library.png)
+
+![Search]("%PUBLIC_URL%/images/search.png")
+
+
+
+## Technologies Used
+
+React [https://reactjs.org/](https://reactjs.org/)
+
+My Shelf uses React to dynamically render items on the page depending on user input.  It's a Single Page Application that uses a router to select which page to render, and conditional logic that checks the state of the database to determine which components on that page should appear.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Context
 
-In the project directory, you can run:
+Instead of passing information from component to component through the use of props, My Shelf primarily uses two contexts to pass information through to child components.
 
-### `npm start`
+Semantic UI React [https://react.semantic-ui.com/](https://react.semantic-ui.com/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+As a style framework, My Shelf uses Semantic UI and Semantic UI React.  This allows for a mobile-friendly experience and a clean look.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Mongo
+
+The database structure for this project is MongoDB and Mongoose was used to interact with the backend data.
+
+[https://mongoosejs.com/](https://mongoosejs.com/)
 
 ### `npm test`
 

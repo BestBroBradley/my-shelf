@@ -12,7 +12,7 @@ export const Navbar = () => {
     return (
         <div>
             <Menu pointing secondary>
-                <Link to="/bookshelf">
+                <Link to="/">
                 <Menu.Item
                     as="div"
                     name='My Bookshelf'
@@ -37,7 +37,7 @@ export const Navbar = () => {
                 />
                 </Link>
                 <Menu.Menu position='right'>
-                    <Link to="/bookshelf">
+                    <Link to="/">
                     <Icon style={{marginTop: "8px", marginRight: "8px"}}
                     onClick={() => handleItemClick('bookshelf')}
                     size='large'

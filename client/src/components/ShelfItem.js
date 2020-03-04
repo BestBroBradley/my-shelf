@@ -18,7 +18,7 @@ export const ShelfItem = (props) => {
     }
 
     return (
-            <Card style={{width: "60%"}}>
+            <Card className="item" style={{width: "70%"}}>
                 <Card.Content>
                     
                     <Card.Header>{title}</Card.Header>
