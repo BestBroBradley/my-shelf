@@ -1,21 +1,20 @@
 import React from 'react'
 import { Title } from "../components/Title"
-import { AcctForm } from "../components/AcctForm"
+import { SignIn } from "../components/SignIn"
 import { Container, Header } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 
-export const CreateAcct = () => {
+export const SignInPage = () => {
     return (
         <>
-        <Title icon="paperclip" />
+        <Title icon="user secret" />
         <div className="ui container">
             <Container fluid style={{marginBottom: 50}}>
-                <Header as='h2'>Create a New Account</Header>
+                <Header as='h2'>Sign in to your Account</Header>
                 <p>
-                    Hello there!  Your virtual bookshelf awaits.
+                    Welcome back, friend!
                 </p>
             </Container>
-            <AcctForm />
+            <SignIn />
         </div>
         </>
     )

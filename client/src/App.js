@@ -9,6 +9,7 @@ import { Bookshelf } from "./pages/Bookshelf"
 import { Finished } from "./pages/Finished"
 import { NoMatch } from "./pages/NoMatch"
 import { CreateAcct } from "./pages/CreateAcct"
+import { SignInPage } from "./pages/SignInPage"
 
 function App() {
   const [search, updateSearch] = useState({
@@ -138,6 +139,9 @@ function App() {
             </Route>
             <Route exact path="/createacct">
               <CreateAcct />
+            </Route>
+            <Route exact path="/signin">
+              <SignInPage />
             </Route>
             <Route exact path="*">
               <NoMatch />

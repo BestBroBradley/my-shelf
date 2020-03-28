@@ -15,10 +15,19 @@ export const Navbar = () => {
 
     const close = () => setModalState({ modalOpen: false })
     const open = () => setModalState({ modalOpen: true })
-    
+
     const handleSubmit = (event) => {
         event.preventDefault()
-        close()
+        const user = document.getElementById('login-user').value
+        const pw = document.getElementById('login-password').value
+        if (user !== '' && pw !== '') {
+            const loginUser = {
+                user,
+                pw
+            }
+            console.log(loginUser)
+            close()
+        } else alert("Username and password cannot be blank!")
     }
 
     return (
@@ -49,28 +58,28 @@ export const Navbar = () => {
                     />
                 </Link>
                 <Modal
-                open={modalState.modalOpen}
-                trigger={<Menu.Menu position='right'>
-                    <Link to="/">
-                        <Icon style={{ marginTop: "8px", marginRight: "8px" }}
-                            onClick={open}
-                            size='large'
-                            name='home'
-                        />
-                    </Link>
-                </Menu.Menu>}>
+                    open={modalState.modalOpen}
+                    trigger={<Menu.Menu position='right'>
+                        <Link to="/">
+                            <Icon style={{ marginTop: "8px", marginRight: "8px" }}
+                                onClick={open}
+                                size='large'
+                                name='user secret'
+                            />
+                        </Link>
+                    </Menu.Menu>}>
                     <Modal.Content>
                         <Form unstackable>
                             <Form.Group widths={2}>
-                                <Form.Input label='Username' placeholder='Username' />
-                                <Form.Input label='Password' placeholder='Password' type='password' />
+                                <Form.Input id='login-user' label='Username' placeholder='Username' />
+                                <Form.Input id='login-password' label='Password' placeholder='Password' type='password' />
                             </Form.Group>
-                            <br/>
+                            <br />
                             <Button onClick={handleSubmit} type='submit'>Submit</Button>
                         </Form>
-                        <br/>
-                        <hr/>
-                        <br/>
+                        <br />
+                        <hr />
+                        <br />
                         <Link onClick={close} to="/createacct">Need an account?  Click to sign up!</Link>
                     </Modal.Content>
                     )
