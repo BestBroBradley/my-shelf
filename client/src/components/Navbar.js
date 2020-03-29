@@ -5,7 +5,7 @@ import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const Navbar = () => {
 
-    const { user } = useContext(BookshelfContext)
+    const { loggedIn } = useContext(BookshelfContext)
 
     const [activeTab, setActiveTab] = useState("home")
     const [modalState, setModalState] = useState({
@@ -28,12 +28,11 @@ export const Navbar = () => {
                 user,
                 pw
             }
-            console.log(loginUser)
             close()
         } else alert("Username and password cannot be blank!")
     }
 
-    const renderModal = loggedIn ? (<Modal
+    const renderModal = <Modal
         open={modalState.modalOpen}
         trigger={<Menu.Menu position='right'>
             <Link to="/">
@@ -59,11 +58,7 @@ export const Navbar = () => {
             <Link onClick={close} to="/createacct">Need an account?  Click to sign up!</Link>
         </Modal.Content>
         )
-    </Modal>) : (<Menu.Item position='right'
-            as="div"
-            name='Logout'
-            active={activeTab === 'logout'}>
-        </Menu.Item>)
+    </Modal>
 
     return (
         <div>

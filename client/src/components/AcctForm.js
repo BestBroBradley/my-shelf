@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Input, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import API from '../utils/API'
 
 export const AcctForm = () => {
 
@@ -16,6 +17,9 @@ export const AcctForm = () => {
             email
         }
         console.log(newUser)
+        if (username && password && email) {
+            API.createUser(newUser)
+        }
     }
 
     return (

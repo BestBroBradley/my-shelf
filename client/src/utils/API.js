@@ -21,6 +21,10 @@ export default {
                 break;
         }
     },
+    createUser: function (user) {
+            console.log(user)
+            return axios.post("/api/user", user)
+    },
     getUserBooks: function () {
             return axios.get("/api/books/")
     },
