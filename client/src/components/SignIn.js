@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Input, Button } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 export const SignIn = () => {

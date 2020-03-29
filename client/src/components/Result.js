@@ -6,11 +6,6 @@ export const Result = (props) => {
     const { title, id, pages, authors, summary, categories } = props.data[0]
     const { addToLibrary, library } = useContext(BookshelfContext)
     
-    function check (event) {
-        
-    }
-
-
     function add (event) {
         const { books } = library
         for (let i=0; i < books.length; i++) {

@@ -2,7 +2,6 @@ import React from 'react'
 import { Title } from "../components/Title"
 import { AcctForm } from "../components/AcctForm"
 import { Container, Header } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 
 export const CreateAcct = () => {
     return (

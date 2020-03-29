@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Menu, Icon, Modal, Form, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const Navbar = () => {
-    const [activeTab, setActiveTab] = useState("home")
 
+    const { user } = useContext(BookshelfContext)
+
+    const [activeTab, setActiveTab] = useState("home")
     const [modalState, setModalState] = useState({
         modalOpen: false
     })
@@ -29,6 +32,38 @@ export const Navbar = () => {
             close()
         } else alert("Username and password cannot be blank!")
     }
+
+    const renderModal = loggedIn ? (<Modal
+        open={modalState.modalOpen}
+        trigger={<Menu.Menu position='right'>
+            <Link to="/">
+                <Icon style={{ marginTop: "8px", marginRight: "8px" }}
+                    onClick={open}
+                    size='large'
+                    name='user secret'
+                />
+            </Link>
+        </Menu.Menu>}>
+        <Modal.Content>
+            <Form unstackable>
+                <Form.Group widths={2}>
+                    <Form.Input id='login-user' label='Username' placeholder='Username' />
+                    <Form.Input id='login-password' label='Password' placeholder='Password' type='password' />
+                </Form.Group>
+                <br />
+                <Button onClick={handleSubmit} type='submit'>Submit</Button>
+            </Form>
+            <br />
+            <hr />
+            <br />
+            <Link onClick={close} to="/createacct">Need an account?  Click to sign up!</Link>
+        </Modal.Content>
+        )
+    </Modal>) : (<Menu.Item position='right'
+            as="div"
+            name='Logout'
+            active={activeTab === 'logout'}>
+        </Menu.Item>)
 
     return (
         <div>
@@ -57,33 +92,7 @@ export const Navbar = () => {
                         onClick={() => handleItemClick('read')}
                     />
                 </Link>
-                <Modal
-                    open={modalState.modalOpen}
-                    trigger={<Menu.Menu position='right'>
-                        <Link to="/">
-                            <Icon style={{ marginTop: "8px", marginRight: "8px" }}
-                                onClick={open}
-                                size='large'
-                                name='user secret'
-                            />
-                        </Link>
-                    </Menu.Menu>}>
-                    <Modal.Content>
-                        <Form unstackable>
-                            <Form.Group widths={2}>
-                                <Form.Input id='login-user' label='Username' placeholder='Username' />
-                                <Form.Input id='login-password' label='Password' placeholder='Password' type='password' />
-                            </Form.Group>
-                            <br />
-                            <Button onClick={handleSubmit} type='submit'>Submit</Button>
-                        </Form>
-                        <br />
-                        <hr />
-                        <br />
-                        <Link onClick={close} to="/createacct">Need an account?  Click to sign up!</Link>
-                    </Modal.Content>
-                    )
-                </Modal>
+                {renderModal}
             </Menu>
         </div>
     )

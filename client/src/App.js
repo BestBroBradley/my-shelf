@@ -10,8 +10,16 @@ import { Finished } from "./pages/Finished"
 import { NoMatch } from "./pages/NoMatch"
 import { CreateAcct } from "./pages/CreateAcct"
 import { SignInPage } from "./pages/SignInPage"
+import { NoAccess } from "./pages/NoAccess"
 
 function App() {
+
+  const [user, setUser] = useState({
+    loggedIn: true,
+    user: "",
+    id: ""
+  })
+
   const [search, updateSearch] = useState({
     term: "",
     type: "Title",
@@ -123,33 +131,48 @@ function App() {
 
   return (
     <>
-      <Router>
-      <Navbar />
-      <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
-        <BookshelfContext.Provider value={{ library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
-          <Switch>
-            <Route exact path="/">
-              <Bookshelf />
-            </Route>
-            <Route exact path="/read">
-              <Finished />
-            </Route>
-            <Route exact path="/search">
-              <Search />
-            </Route>
-            <Route exact path="/createacct">
-              <CreateAcct />
-            </Route>
-            <Route exact path="/signin">
-              <SignInPage />
-            </Route>
-            <Route exact path="*">
-              <NoMatch />
-            </Route>
-          </Switch>
-        </BookshelfContext.Provider>
-      </SearchContext.Provider>
-    </Router>
+    {user.loggedIn ? <Router>
+  <Navbar />
+  <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
+    <BookshelfContext.Provider value={{ user, library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
+      <Switch>
+        <Route exact path="/">
+          <Bookshelf />
+        </Route>
+        <Route exact path="/read">
+          <Finished />
+        </Route>
+        <Route exact path="/search">
+          <Search />
+        </Route>
+        <Route exact path="/createacct">
+          <CreateAcct />
+        </Route>
+        <Route exact path="/signin">
+          <SignInPage />
+        </Route>
+        <Route exact path="*">
+          <NoMatch />
+        </Route>
+      </Switch>
+    </BookshelfContext.Provider>
+  </SearchContext.Provider>
+</Router> : <Router>
+  <Navbar />
+    <BookshelfContext.Provider value={user}>
+  <Switch>
+        <Route exact path="/createacct">
+          <CreateAcct />
+        </Route>
+        <Route exact path="/signin">
+          <SignInPage />
+        </Route>
+        <Route exact path="*">
+          <NoAccess />
+        </Route>
+      </Switch>
+      </BookshelfContext.Provider>
+</Router>}
       </>
   );
 }

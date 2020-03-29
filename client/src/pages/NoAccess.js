@@ -1,18 +1,17 @@
 import React from 'react'
 import { Title } from "../components/Title"
+import { SignIn } from "../components/SignIn"
 import { Container, Header } from 'semantic-ui-react'
 
-export const NoMatch = () => {
+export const NoAccess = () => {
     return (
         <>
-        <Title icon="hdd" />
+        <Title icon="user secret" />
         <div className="ui container">
             <Container fluid style={{marginBottom: 50}}>
-                <Header as='h1'>404</Header>
-                <p>
-                    Sorry, looks like we can't find that page.  
-                </p>
+                <Header as='h2'>You need to sign in to view this page.</Header>
             </Container>
+            <SignIn />
         </div>
         </>
     )
