@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Input, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import API from '../utils/API'
+import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const AcctForm = () => {
 
@@ -9,37 +10,97 @@ export const AcctForm = () => {
         username: '',
         password: '',
         email: '',
-        usernameError: true,
-        passwordError: true,
-        emailError: true
+        usernameError: false,
+        passwordError: false,
+        emailError: false,
+        errorMessage: '',
+        genError: false
     })
 
+    const { usernameError, passwordError, emailError, errorMessage, genError } = formState
+
+    const { user, setUser } = useContext(BookshelfContext)
+
     const handleUpdate = (event) => {
-        const {name, value} = event.target
+        const { name, value } = event.target
         updateFormState({
             ...formState,
             [name]: value
         })
     }
+
     const handleSubmit = (event) => {
         event.preventDefault()
         const username = document.getElementById('username').value
         const password = document.getElementById('password').value
         const email = document.getElementById('email').value
-        const newUser = {
-            username,
-            password,
-            email
-        }
-        console.log(newUser)
-        if (username && password && email) {
-            API.createUser(newUser)
+        const validPassword = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/)
+        const validEmail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
+        let error = false
+
+        if (formState.username === '') {
+            updateFormState({
+                ...formState,
+                usernameError: true,
+                passwordError: false,
+                emailError: false,
+                errorMessage: 'Please enter a username',
+                genError: true
+            })
+            error = true
+        } else if (!validPassword.test(formState.password)) {
+            updateFormState({
+                ...formState,
+                passwordError: true,
+                usernameError: false,
+                emailError: false,
+                errorMessage: 'Password must include: 8-25 chars, A-Z, a-z, 0-9',
+                genError: true
+            })
+            error = true
+        } else if (!validEmail.test(formState.email)) {
+            updateFormState({
+                ...formState,
+                emailError: true,
+                passwordError: false,
+                usernameError: false,
+                errorMessage: 'Please enter a valid email address',
+                genError: true
+            })
+            error = true
+        } else {
+            updateFormState({
+                ...formState,
+                emailError: false,
+                passwordError: false,
+                usernameError: false,
+                errorMessage: '',
+                genError: false
+            })
+            const newUser = {
+                username,
+                password,
+                email
+            }
+            console.log(newUser)
+            API.createUser(newUser).then((res) => {
+                setUser({
+                    ...user,
+                    loggedIn: true
+                })
+            })
         }
     }
 
     return (
         <>
-            <Form onSubmit={handleSubmit}>
+            <Form error onSubmit={handleSubmit}>
+                { genError ? <Message
+                error
+                header="Look's like there's a problem..."
+                content={errorMessage}
+                /> : null}
                 <Form.Group widths='equal'>
                     <Form.Field
                         id='username'
@@ -49,10 +110,7 @@ export const AcctForm = () => {
                         placeholder='Username'
                         value={formState.username}
                         onChange={handleUpdate}
-                        error={{
-                            content: 'Username must be at least 8 characters',
-                            pointing: 'below',
-                          }}
+                        error={usernameError}
                     />
                     <Form.Field
                         id='password'
@@ -63,10 +121,7 @@ export const AcctForm = () => {
                         placeholder='Password'
                         value={formState.password}
                         onChange={handleUpdate}
-                        error={{
-                            content: 'Password must contain at least 1 uppercase letter, 1 lowercase letter, and a number',
-                            pointing: 'below',
-                          }}
+                        error={passwordError}
                     />
                 </Form.Group>
                 <Form.Field
@@ -74,13 +129,10 @@ export const AcctForm = () => {
                     control={Input}
                     label='Email'
                     name='email'
-                    placeholder='joe@schmoe.com'
+                    placeholder='example@example.com'
                     value={formState.email}
                     onChange={handleUpdate}
-                    error={{
-                        content: 'Please enter a valid email address',
-                        pointing: 'below',
-                      }}
+                    error={emailError}
                 />
                 <Form.Field
                     id='form-button-control-public'

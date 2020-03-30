@@ -15,7 +15,7 @@ import { NoAccess } from "./pages/NoAccess"
 function App() {
 
   const [user, setUser] = useState({
-    loggedIn: true,
+    loggedIn: false,
     user: "",
     id: ""
   })
@@ -134,7 +134,7 @@ function App() {
     {user.loggedIn ? <Router>
   <Navbar />
   <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
-    <BookshelfContext.Provider value={{ user, library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
+    <BookshelfContext.Provider value={{ user, setUser, library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
       <Switch>
         <Route exact path="/">
           <Bookshelf />
@@ -159,7 +159,7 @@ function App() {
   </SearchContext.Provider>
 </Router> : <Router>
   <Navbar />
-    <BookshelfContext.Provider value={user}>
+    <BookshelfContext.Provider value={{user, setUser}}>
   <Switch>
         <Route exact path="/createacct">
           <CreateAcct />
