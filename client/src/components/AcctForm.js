@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { Form, Input, Button, Message } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import API from '../utils/API'
 import { BookshelfContext } from '../utils/BookshelfContext'
 
-export const AcctForm = () => {
+export const AcctForm = (props) => {
+
+    console.log(props.props)
 
     const [formState, updateFormState] = useState({
         username: '',
@@ -85,10 +87,22 @@ export const AcctForm = () => {
             }
             console.log(newUser)
             API.createUser(newUser).then((res) => {
-                setUser({
-                    ...user,
-                    loggedIn: true
-                })
+                if (res.data === "Username already exists") {
+                    updateFormState({
+                        ...formState,
+                        errorMessage: res.data,
+                        genError: true
+                    })
+                } else {
+                    setUser({
+                        ...user,
+                        loggedIn: true
+                    })
+                    alert("Successfully created account!")
+                    setTimeout(() => {
+                        props.props.history.push('/search')
+                    }, 3000)
+                }
             })
         }
     }
@@ -96,10 +110,10 @@ export const AcctForm = () => {
     return (
         <>
             <Form error onSubmit={handleSubmit}>
-                { genError ? <Message
-                error
-                header="Look's like there's a problem..."
-                content={errorMessage}
+                {genError ? <Message
+                    error
+                    header="Look's like there's a problem..."
+                    content={errorMessage}
                 /> : null}
                 <Form.Group widths='equal'>
                     <Form.Field

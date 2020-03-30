@@ -161,9 +161,7 @@ function App() {
   <Navbar />
     <BookshelfContext.Provider value={{user, setUser}}>
   <Switch>
-        <Route exact path="/createacct">
-          <CreateAcct />
-        </Route>
+        <Route exact path="/createacct" component={CreateAcct}/>
         <Route exact path="/signin">
           <SignInPage />
         </Route>

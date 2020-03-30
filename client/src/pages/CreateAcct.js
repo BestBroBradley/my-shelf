@@ -3,7 +3,10 @@ import { Title } from "../components/Title"
 import { AcctForm } from "../components/AcctForm"
 import { Container, Header } from 'semantic-ui-react'
 
-export const CreateAcct = () => {
+export const CreateAcct = (props) => {
+
+    console.log(props)
+
     return (
         <>
         <Title icon="paperclip" />
@@ -14,7 +17,7 @@ export const CreateAcct = () => {
                     Hello there!  Your virtual bookshelf awaits.
                 </p>
             </Container>
-            <AcctForm />
+            <AcctForm props={props} />
         </div>
         </>
     )
