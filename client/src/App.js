@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { SearchContext } from './utils/SearchContext'
 import { BookshelfContext } from './utils/BookshelfContext'
 import API from './utils/API'
-import { Navbar } from "./components/Navbar"
+import { AuthNavbar } from "./components/AuthNavbar"
+import { UnauthNavbar } from "./components/UnauthNavbar"
 import { Search } from "./pages/Search"
+import { Welcome } from "./pages/Welcome"
 import { Bookshelf } from "./pages/Bookshelf"
 import { Finished } from "./pages/Finished"
 import { NoMatch } from "./pages/NoMatch"
@@ -15,7 +17,7 @@ import { NoAccess } from "./pages/NoAccess"
 function App() {
 
   const [user, setUser] = useState({
-    loggedIn: false,
+    loggedIn: true,
     books: [],
     username: "",
     id: ""
@@ -40,10 +42,9 @@ function App() {
     let totalPages = 0
     const { books } = library
     for (const book of books) {
-      if (book.isRead === true)
-      { totalPages += books.pageCount }
+      if (book.isRead === true) { totalPages += books.pageCount }
     }
-    updateLibrary({...library, totalPages: totalPages })
+    updateLibrary({ ...library, totalPages: totalPages })
   }
 
   const addToLibrary = (data) => {
@@ -59,7 +60,7 @@ function App() {
   const loadBooks = () => {
     API.getUserBooks()
       .then(res => {
-        updateLibrary({books: res.data})
+        updateLibrary({ books: res.data })
       })
       .catch(err => {
         console.log(err)
@@ -78,12 +79,12 @@ function App() {
 
   const emptyFinished = () => {
     API.deleteRead()
-    .then(res => {
-      loadBooks()
-    })
-    .catch(err => {
-      console.log(err)
-    })
+      .then(res => {
+        loadBooks()
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   const markAsRead = (id) => {
@@ -112,6 +113,19 @@ function App() {
     updateSearch({ ...search, type: type })
   })
 
+  const handleLogin = (data => {
+    API.login(data)
+      .then((res) => {
+        console.log(res)
+        setUser({
+          ...user,
+          id: res.data._id,
+          books: res.data.books,
+          username: res.data.username
+        })
+      })
+  })
+
   const googleSearch = (query => {
     API.search(query)
       .then(res => {
@@ -132,47 +146,44 @@ function App() {
 
   return (
     <>
-    {user.loggedIn ? <Router>
-  <Navbar />
-  <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
-    <BookshelfContext.Provider value={{ user, setUser, library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
-      <Switch>
-        <Route exact path="/">
-          <Bookshelf />
-        </Route>
-        <Route exact path="/read">
-          <Finished />
-        </Route>
-        <Route exact path="/search">
-          <Search />
-        </Route>
-        <Route exact path="/createacct">
-          <CreateAcct />
-        </Route>
-        <Route exact path="/signin">
-          <SignInPage />
-        </Route>
-        <Route exact path="*">
-          <NoMatch />
-        </Route>
-      </Switch>
-    </BookshelfContext.Provider>
-  </SearchContext.Provider>
-</Router> : <Router>
-  <Navbar />
-    <BookshelfContext.Provider value={{user, setUser}}>
-  <Switch>
-        <Route exact path="/createacct" component={CreateAcct}/>
-        <Route exact path="/signin">
-          <SignInPage />
-        </Route>
-        <Route exact path="*">
-          <NoAccess />
-        </Route>
-      </Switch>
-      </BookshelfContext.Provider>
-</Router>}
-      </>
+      {user.loggedIn ? <Router>
+        <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
+          <BookshelfContext.Provider value={{ user, setUser, library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
+        <AuthNavbar />
+            <Switch>
+              <Route exact path="/">
+                <Bookshelf />
+              </Route>
+              <Route exact path="/read">
+                <Finished />
+              </Route>
+              <Route exact path="/search">
+                <Search />
+              </Route>
+              <Route exact path="/createacct">
+                <CreateAcct />
+              </Route>
+              <Route exact path="/signin">
+                <SignInPage />
+              </Route>
+              <Route exact path="*">
+                <NoMatch />
+              </Route>
+            </Switch>
+          </BookshelfContext.Provider>
+        </SearchContext.Provider>
+      </Router> : <Router>
+          <BookshelfContext.Provider value={{ user, setUser, handleLogin }}>
+          <UnauthNavbar />
+            <Switch>
+              <Route exact path="/" component={Welcome} />
+              <Route exact path="/createacct" component={CreateAcct} />
+              <Route exact path="/signin" component={SignInPage} />
+              <Route exact path="*" component={NoAccess} />
+            </Switch>
+          </BookshelfContext.Provider>
+        </Router>}
+    </>
   );
 }
 

@@ -1,12 +1,10 @@
 import React, { useState, useContext } from 'react'
 import { Form, Input, Button, Message } from 'semantic-ui-react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import API from '../utils/API'
 import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const AcctForm = (props) => {
-
-    console.log(props.props)
 
     const [formState, updateFormState] = useState({
         username: '',
@@ -104,7 +102,7 @@ export const AcctForm = (props) => {
                     alert("Successfully created account!")
                     setTimeout(() => {
                         props.props.history.push('/search')
-                    }, 3000)
+                    }, 2000)
                 }
             })
         }

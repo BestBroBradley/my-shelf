@@ -3,7 +3,7 @@ import { Menu, Icon, Modal, Form, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { BookshelfContext } from '../utils/BookshelfContext'
 
-export const Navbar = () => {
+export const UnauthNavbar = () => {
 
     const { loggedIn } = useContext(BookshelfContext)
 
@@ -66,25 +66,25 @@ export const Navbar = () => {
                 <Link to="/">
                     <Menu.Item
                         as="div"
-                        name='My Bookshelf'
-                        active={activeTab === 'bookshelf'}
-                        onClick={() => handleItemClick('bookshelf')}
+                        name='Welcome'
+                        active={activeTab === 'welcome'}
+                        onClick={() => handleItemClick('welcome')}
                     />
                 </Link>
-                <Link to="/search">
+                <Link to="/createacct">
                     <Menu.Item
                         as="div"
-                        name='Search'
-                        active={activeTab === 'search'}
-                        onClick={() => handleItemClick('search')}
+                        name='Create Account'
+                        active={activeTab === 'create'}
+                        onClick={() => handleItemClick('create')}
                     />
                 </Link>
-                <Link to="/read">
+                <Link to="/signin">
                     <Menu.Item
                         as="div"
-                        name='Finished Titles'
-                        active={activeTab === 'read'}
-                        onClick={() => handleItemClick('read')}
+                        name='Sign In'
+                        active={activeTab === 'signin'}
+                        onClick={() => handleItemClick('signin')}
                     />
                 </Link>
                 {renderModal}

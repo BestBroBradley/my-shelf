@@ -4,9 +4,7 @@ import { AcctForm } from "../components/AcctForm"
 import { Container, Header } from 'semantic-ui-react'
 
 export const CreateAcct = (props) => {
-
-    console.log(props)
-
+    
     return (
         <>
         <Title icon="paperclip" />
