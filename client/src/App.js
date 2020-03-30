@@ -16,7 +16,8 @@ function App() {
 
   const [user, setUser] = useState({
     loggedIn: false,
-    user: "",
+    books: [],
+    username: "",
     id: ""
   })
 

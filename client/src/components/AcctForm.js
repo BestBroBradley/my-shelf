@@ -96,7 +96,10 @@ export const AcctForm = (props) => {
                 } else {
                     setUser({
                         ...user,
-                        loggedIn: true
+                        loggedIn: true,
+                        id: res.data._id,
+                        books: res.data.books,
+                        username: res.data.username
                     })
                     alert("Successfully created account!")
                     setTimeout(() => {
