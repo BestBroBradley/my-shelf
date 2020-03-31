@@ -3,7 +3,7 @@ import { Title } from "../components/Title"
 import { SignIn } from "../components/SignIn"
 import { Container, Header } from 'semantic-ui-react'
 
-export const Welcome = () => {
+export const Welcome = (props) => {
     return (
         <>
         <Title icon="hand spock outline" />
@@ -15,7 +15,7 @@ export const Welcome = () => {
                 <h4>Sign in or sign up below!</h4>
                 <br/>
                 <br/>
-            <SignIn />
+            <SignIn props={props}/>
         </div>
         </>
     )

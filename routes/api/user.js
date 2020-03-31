@@ -7,6 +7,7 @@ router
 
 router
   .route("/:id")
+  .post(userController.login)
   // .get(userController.findBooks)
   // .put(userController.update)
   // .delete(userController.remove);

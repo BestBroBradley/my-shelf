@@ -2,14 +2,19 @@ import React, { useState, useContext } from 'react'
 import { Menu, Icon, Modal, Form, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { BookshelfContext } from '../utils/BookshelfContext'
+import API from '../utils/API'
 
 export const UnauthNavbar = () => {
 
-    const { loggedIn } = useContext(BookshelfContext)
+    const { user, setUser } = useContext(BookshelfContext)
+
+    const { loggedIn } = user
 
     const [activeTab, setActiveTab] = useState("home")
     const [modalState, setModalState] = useState({
-        modalOpen: false
+        modalOpen: false,
+        username: '',
+        password: ''
     })
 
     const handleItemClick = (active) => {
@@ -18,6 +23,14 @@ export const UnauthNavbar = () => {
 
     const close = () => setModalState({ modalOpen: false })
     const open = () => setModalState({ modalOpen: true })
+
+    const handleChange = (event) => {
+        const { name, value } = event.target
+        setModalState({
+            ...modalState,
+            [name]: value
+        })
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault()
@@ -28,37 +41,20 @@ export const UnauthNavbar = () => {
                 user,
                 pw
             }
+            API.login(loginUser)
+                .then((res) => {
+                    console.log(res)
+                    setUser({
+                        ...user,
+                        id: res.data._id,
+                        books: res.data.books,
+                        username: res.data.username,
+                        loggedIn: true
+                    })
+                })
             close()
         } else alert("Username and password cannot be blank!")
     }
-
-    const renderModal = <Modal
-        open={modalState.modalOpen}
-        trigger={<Menu.Menu position='right'>
-            <Link to="/">
-                <Icon style={{ marginTop: "8px", marginRight: "8px" }}
-                    onClick={open}
-                    size='large'
-                    name='user secret'
-                />
-            </Link>
-        </Menu.Menu>}>
-        <Modal.Content>
-            <Form unstackable>
-                <Form.Group widths={2}>
-                    <Form.Input id='login-user' label='Username' placeholder='Username' />
-                    <Form.Input id='login-password' label='Password' placeholder='Password' type='password' />
-                </Form.Group>
-                <br />
-                <Button onClick={handleSubmit} type='submit'>Submit</Button>
-            </Form>
-            <br />
-            <hr />
-            <br />
-            <Link onClick={close} to="/createacct">Need an account?  Click to sign up!</Link>
-        </Modal.Content>
-        )
-    </Modal>
 
     return (
         <div>
@@ -87,7 +83,33 @@ export const UnauthNavbar = () => {
                         onClick={() => handleItemClick('signin')}
                     />
                 </Link>
-                {renderModal}
+                <Modal
+                    open={modalState.modalOpen}
+                    trigger={<Menu.Menu position='right'>
+                        <Link to="/">
+                            <Icon style={{ marginTop: "8px", marginRight: "8px" }}
+                                onClick={open}
+                                size='large'
+                                name='user secret'
+                            />
+                        </Link>
+                    </Menu.Menu>}>
+                    <Modal.Content>
+                        <Form unstackable>
+                            <Form.Group widths={2}>
+                                <Form.Input id='login-user' name='username' onChange={handleChange} value={modalState.username} label='Username'/>
+                                <Form.Input id='login-password' name='password' onChange={handleChange} value={modalState.password} label='Password' type='password' />
+                            </Form.Group>
+                            <br />
+                            <Button onClick={handleSubmit} type='submit'>Submit</Button>
+                        </Form>
+                        <br />
+                        <hr />
+                        <br />
+                        <Link onClick={close} to="/createacct">Need an account?  Click to sign up!</Link>
+                    </Modal.Content>
+                    )
+    </Modal>
             </Menu>
         </div>
     )

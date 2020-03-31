@@ -45,7 +45,24 @@ module.exports = {
         }
       })
   },
-  // update: function(req, res) {
+
+  login: function (req, res) {
+    console.log(req.params.id)
+    User
+    .findOne({ username: req.params.id })
+    .then(data => {
+      if (data) {
+        if (bcrypt.compareSync(req.body.pw, data.password)) {
+         res.json(data) 
+        } else {
+          res.send("Password doesn't match")
+        }
+      } else (res.send("User doesn't exist"))
+    })
+    .catch(err => console.log(err))
+  },
+  
+    // update: function(req, res) {
   //   Book
   //     .findOneAndUpdate({_id: req.params.id}, {isRead: true})
   //     .then(data => res.json(data))

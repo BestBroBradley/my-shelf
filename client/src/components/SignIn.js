@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Form, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
+import API from '../utils/API'
+import { BookshelfContext } from '../utils/BookshelfContext'
 
-export const SignIn = () => {
+export const SignIn = (props) => {
 
-    const [ formState, updateFormState ] = useState({
+    const { user, setUser } = useContext(BookshelfContext)
+
+    const [formState, updateFormState] = useState({
         username: '',
         password: '',
         userError: false,
@@ -54,20 +58,33 @@ export const SignIn = () => {
                 user,
                 pw
             }
-            // API.login(loginUser)
-            alert("No error!")
+            API.login(loginUser)
+                .then((res) => {
+                    console.log(res)
+                    setUser({
+                        ...user,
+                        id: res.data._id,
+                        books: res.data.books,
+                        username: res.data.username,
+                        loggedIn: true
+                    })
+                    setTimeout(() => {
+                        props.props.history.push('/')
+                    }, 2000)
+                })
+
         }
     }
-        
-        return (
+
+    return (
         <>
             <Form error unstackable>
-                { formState.genError ? <Message
-                error
-                content={formState.errorMessage}
+                {formState.genError ? <Message
+                    error
+                    content={formState.errorMessage}
                 /> : null}
                 <Form.Group widths={2}>
-                    <Form.Input id='login-user' label='Username' value={formState.username} name='username' placeholder='Username' onChange={handleChange}/>
+                    <Form.Input id='login-user' label='Username' value={formState.username} name='username' placeholder='Username' onChange={handleChange} />
                     <Form.Input id='login-password' label='Password' value={formState.password} name='password' placeholder='Password' onChange={handleChange} type='password' />
                 </Form.Group>
                 <br />

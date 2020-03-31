@@ -3,8 +3,8 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { BookshelfContext } from '../utils/BookshelfContext'
 
-export const AuthNavbar = () => {
-
+export const AuthNavbar = (props) => {
+    
     const { user, setUser } = useContext(BookshelfContext)
 
     console.log(user)

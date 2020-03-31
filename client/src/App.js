@@ -113,19 +113,6 @@ function App() {
     updateSearch({ ...search, type: type })
   })
 
-  const handleLogin = (data => {
-    API.login(data)
-      .then((res) => {
-        console.log(res)
-        setUser({
-          ...user,
-          id: res.data._id,
-          books: res.data.books,
-          username: res.data.username
-        })
-      })
-  })
-
   const googleSearch = (query => {
     API.search(query)
       .then(res => {
@@ -149,37 +136,25 @@ function App() {
       {user.loggedIn ? <Router>
         <SearchContext.Provider value={{ search, handleInputChange, handleSubmit, handleSelectorChange, googleSearch }}>
           <BookshelfContext.Provider value={{ user, setUser, library, getCount, addToLibrary, emptyFinished, removeFromLibrary, markAsRead, loadBooks }}>
-        <AuthNavbar />
+            <AuthNavbar />
             <Switch>
-              <Route exact path="/">
-                <Bookshelf />
-              </Route>
-              <Route exact path="/read">
-                <Finished />
-              </Route>
-              <Route exact path="/search">
-                <Search />
-              </Route>
-              <Route exact path="/createacct">
-                <CreateAcct />
-              </Route>
-              <Route exact path="/signin">
-                <SignInPage />
-              </Route>
-              <Route exact path="*">
-                <NoMatch />
-              </Route>
+              <Route exact path="/" component={Bookshelf} />
+              <Route exact path="/read" component={Finished} />
+              <Route exact path="/search" component={Search} />
+              <Route exact path="/createacct" component={CreateAcct} />
+              <Route exact path="/signin" component={SignInPage} />
+              <Route exact path="*" component={NoMatch} />
             </Switch>
           </BookshelfContext.Provider>
         </SearchContext.Provider>
       </Router> : <Router>
-          <BookshelfContext.Provider value={{ user, setUser, handleLogin }}>
-          <UnauthNavbar />
+          <BookshelfContext.Provider value={{ user, setUser }}>
+            <UnauthNavbar />
             <Switch>
               <Route exact path="/" component={Welcome} />
               <Route exact path="/createacct" component={CreateAcct} />
               <Route exact path="/signin" component={SignInPage} />
-              <Route exact path="*" component={NoAccess} />
+              <Route exact path="*" component={Welcome} />
             </Switch>
           </BookshelfContext.Provider>
         </Router>}
