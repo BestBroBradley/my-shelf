@@ -35,7 +35,7 @@ function App() {
 
   useEffect(() => {
     loadBooks()
-  }, [])
+  }, [user.loggedIn])
 
   const getCount = () => {
     let totalPages = 0
@@ -57,9 +57,9 @@ function App() {
   }
 
   const loadBooks = () => {
-    API.getUserBooks()
+    API.getUserBooks(user.id)
       .then(res => {
-        updateLibrary({ books: res.data })
+        setUser({ ...user, books: res.data })
       })
       .catch(err => {
         console.log(err)

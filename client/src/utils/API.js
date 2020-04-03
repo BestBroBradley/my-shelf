@@ -29,8 +29,8 @@ export default {
             return axios.post("/api/user/" + details.user, details)
     },
 
-    getUserBooks: function () {
-            return axios.get("/api/books/")
+    getUserBooks: function (userid) {
+            return axios.get("/api/books/" + userid)
     },
     updateBook: function (id) {
             return axios.put("/api/books/" + id)
