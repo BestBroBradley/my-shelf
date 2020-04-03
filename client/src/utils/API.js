@@ -1,5 +1,4 @@
 import axios from "axios"
-import { CommentActions } from "semantic-ui-react"
 
 const APIKEY = process.env.REACT_APP_APIKEY
 
@@ -23,12 +22,10 @@ export default {
         }
     },
     createUser: function (user) {
-            console.log(user)
             return axios.post("/api/user", user)
     },
 
     login: function (details) {
-            console.log(details)
             return axios.post("/api/user/" + details.user, details)
     },
 
@@ -45,7 +42,6 @@ export default {
             return axios.post("/api/books", book)
     },
     deleteRead: function () {
-            console.log(`delete`)
             return axios.delete("/api/books")
     }
 }

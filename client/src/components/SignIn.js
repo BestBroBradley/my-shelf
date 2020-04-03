@@ -6,7 +6,7 @@ import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const SignIn = (props) => {
 
-    const { user, setUser } = useContext(BookshelfContext)
+    const { setUser } = useContext(BookshelfContext)
 
     const [formState, updateFormState] = useState({
         username: '',
@@ -60,17 +60,27 @@ export const SignIn = (props) => {
             }
             API.login(loginUser)
                 .then((res) => {
-                    console.log(res)
-                    setUser({
-                        ...user,
-                        id: res.data._id,
-                        books: res.data.books,
-                        username: res.data.username,
-                        loggedIn: true
-                    })
-                    setTimeout(() => {
-                        props.props.history.push('/')
-                    }, 2000)
+                    if (res.data === "Password doesn't match") {
+                        updateFormState({
+                            ...formState,
+                            password: '',
+                            userError: false,
+                            passwordError: false,
+                            errorMessage: 'Incorrect password',
+                            genError: true
+                        })
+                    } else {
+                        setUser({
+                            ...user,
+                            id: res.data._id,
+                            books: res.data.books,
+                            username: res.data.username,
+                            loggedIn: true
+                        })
+                        setTimeout(() => {
+                            props.props.history.push('/')
+                        }, 2000)
+                    }
                 })
 
         }

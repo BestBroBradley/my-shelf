@@ -5,21 +5,13 @@ import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const AuthNavbar = (props) => {
     
-    const { user, setUser } = useContext(BookshelfContext)
-
-    console.log(user)
+    const { setUser } = useContext(BookshelfContext)
 
     const [activeTab, setActiveTab] = useState("home")
-    const [modalState, setModalState] = useState({
-        modalOpen: false
-    })
 
     const handleItemClick = (active) => {
         setActiveTab(active)
     }
-
-    const close = () => setModalState({ modalOpen: false })
-    const open = () => setModalState({ modalOpen: true })
 
     const handleLogout = () => {
         setUser({
@@ -30,16 +22,6 @@ export const AuthNavbar = (props) => {
         })
         console.log("logout")
     }
-
-    const renderModal = <Menu.Menu position='right'>
-                <Link to="/">
-                    <Menu.Item
-                        as="div"
-                        name='Logout'
-                        onClick={handleLogout}
-                    />
-                </Link>
-        </Menu.Menu>
 
     return (
         <div>
@@ -68,7 +50,15 @@ export const AuthNavbar = (props) => {
                         onClick={() => handleItemClick('read')}
                     />
                 </Link>
-                {renderModal}
+                <Menu.Menu position='right'>
+                <Link to="/">
+                    <Menu.Item
+                        as="div"
+                        name='Logout'
+                        onClick={handleLogout}
+                    />
+                </Link>
+        </Menu.Menu>
             </Menu>
         </div>
     )

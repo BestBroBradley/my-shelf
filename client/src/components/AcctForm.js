@@ -37,8 +37,6 @@ export const AcctForm = (props) => {
         const validPassword = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,25}$/)
         const validEmail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
-        let error = false
-
         if (formState.username === '') {
             updateFormState({
                 ...formState,
@@ -48,7 +46,6 @@ export const AcctForm = (props) => {
                 errorMessage: 'Please enter a username',
                 genError: true
             })
-            error = true
         } else if (!validPassword.test(formState.password)) {
             updateFormState({
                 ...formState,
@@ -58,7 +55,6 @@ export const AcctForm = (props) => {
                 errorMessage: 'Password must include: 8-25 chars, A-Z, a-z, 0-9',
                 genError: true
             })
-            error = true
         } else if (!validEmail.test(formState.email)) {
             updateFormState({
                 ...formState,
@@ -68,7 +64,6 @@ export const AcctForm = (props) => {
                 errorMessage: 'Please enter a valid email address',
                 genError: true
             })
-            error = true
         } else {
             updateFormState({
                 ...formState,
@@ -83,7 +78,6 @@ export const AcctForm = (props) => {
                 password,
                 email
             }
-            console.log(newUser)
             API.createUser(newUser).then((res) => {
                 if (res.data === "Username already exists") {
                     updateFormState({

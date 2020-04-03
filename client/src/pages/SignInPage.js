@@ -5,8 +5,6 @@ import { Container, Header } from 'semantic-ui-react'
 
 export const SignInPage = (props) => {
 
-    console.log(props)
-    
     return (
         <>
         <Title icon="user secret" />

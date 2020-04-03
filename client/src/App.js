@@ -12,12 +12,11 @@ import { Finished } from "./pages/Finished"
 import { NoMatch } from "./pages/NoMatch"
 import { CreateAcct } from "./pages/CreateAcct"
 import { SignInPage } from "./pages/SignInPage"
-import { NoAccess } from "./pages/NoAccess"
 
 function App() {
 
   const [user, setUser] = useState({
-    loggedIn: true,
+    loggedIn: false,
     books: [],
     username: "",
     id: ""
@@ -116,7 +115,6 @@ function App() {
   const googleSearch = (query => {
     API.search(query)
       .then(res => {
-        console.log(res)
         const results = res.data.items.map(item => [{
           id: item.id,
           title: item.volumeInfo.title,
@@ -125,7 +123,6 @@ function App() {
           summary: item.volumeInfo.description,
           categories: item.volumeInfo.categories
         }])
-        console.log(results)
         updateSearch({ ...search, results: results })
       })
       .catch(err => console.log(err))
