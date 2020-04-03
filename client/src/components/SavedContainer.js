@@ -4,8 +4,8 @@ import { Card, Message } from 'semantic-ui-react'
 import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const SavedContainer = () => {
-    const { library } = useContext(BookshelfContext)
-    const bookshelf = (library.books.filter(book => {
+    const { user } = useContext(BookshelfContext)
+    const bookshelf = (user.books.filter(book => {
         if ((book.isRead) === false) {
             return book
         }

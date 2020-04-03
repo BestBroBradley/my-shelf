@@ -49,6 +49,7 @@ function App() {
   const addToLibrary = (data) => {
     API.addBook(data)
       .then(res => {
+        console.log(res)
         loadBooks()
       })
       .catch(err => {

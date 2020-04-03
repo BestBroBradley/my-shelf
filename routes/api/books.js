@@ -2,8 +2,11 @@ const router = require("express").Router();
 const booksController = require("../../controllers/booksController");
 
 router
-  .route("/:userid/")
+  .route("/")
   .post(booksController.create)
+
+router
+  .route("/:userid/")
   .get(booksController.findAll)
   .delete(booksController.clear)
 

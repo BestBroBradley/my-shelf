@@ -39,7 +39,7 @@ export default {
             return axios.delete("/api/books/" + id)
     },
     addBook: function (book) {
-            return axios.post("/api/books", book)
+            return axios.post("/api/books/", book)
     },
     deleteRead: function () {
             return axios.delete("/api/books")

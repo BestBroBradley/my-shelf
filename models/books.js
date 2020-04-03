@@ -8,7 +8,8 @@ const bookSchema = new Schema({
   synopsis: { type: String, required: false },
   categories: { type: Array, required: true },
   isRead: { type: Boolean, required: true, default: false },
-  pageCount: { type: Number, required: true, default: 0 }
+  pageCount: { type: Number, required: true, default: 0 },
+  userid: {type: String, required: true}
 });
 
 const Book = mongoose.model("Book", bookSchema);

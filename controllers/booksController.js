@@ -4,11 +4,11 @@ const { Book } = db
 
 module.exports = {
     findAll: function(req, res) {
-      db.User
-        .findOne({_id: req.params.userid})
+      Book
+        .find({userid: req.params.userid})
         .then(data => {
-          console.log(data.books)
-          res.json(data.books)
+          console.log(`This is the data: ${data}`)
+          res.json(data)
         })
         .catch(err => console.log(err));
     },
@@ -16,7 +16,7 @@ module.exports = {
       Book
         .create(req.body)
         .then(data => res.json(data))
-        .catch(err => res.status(422).json(err));
+        .catch(err => console.log(err))
     },
     update: function(req, res) {
       Book

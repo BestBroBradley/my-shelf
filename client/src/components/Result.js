@@ -4,7 +4,7 @@ import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const Result = (props) => {
     const { title, id, pages, authors, summary, categories } = props.data[0]
-    const { addToLibrary, library } = useContext(BookshelfContext)
+    const { user, addToLibrary, library } = useContext(BookshelfContext)
     
     function add (event) {
         const { books } = library
@@ -15,7 +15,7 @@ export const Result = (props) => {
             }}
         event.target.textContent = "Added to Library"
         const newBook = 
-        {title, id, pageCount: pages, author: authors, synopsis: summary, isRead: false, categories }
+        {title, id, pageCount: pages, author: authors, synopsis: summary, isRead: false, userid: user.id, categories }
         addToLibrary(newBook)
     }
 
