@@ -78,7 +78,7 @@ function App() {
   }
 
   const emptyFinished = () => {
-    API.deleteRead()
+    API.deleteRead(user.id)
       .then(res => {
         loadBooks()
       })

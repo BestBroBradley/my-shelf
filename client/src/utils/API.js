@@ -33,15 +33,15 @@ export default {
             return axios.get("/api/books/" + userid)
     },
     updateBook: function (id) {
-            return axios.put("/api/books/" + id)
+            return axios.put("/api/books/update/" + id)
     },
     deleteBook: function (id) {
-            return axios.delete("/api/books/" + id)
+            return axios.delete("/api/books/update/" + id)
     },
     addBook: function (book) {
             return axios.post("/api/books/", book)
     },
-    deleteRead: function () {
-            return axios.delete("/api/books")
+    deleteRead: function (userid) {
+            return axios.delete("/api/books/" + userid)
     }
 }

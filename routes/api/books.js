@@ -11,7 +11,7 @@ router
   .delete(booksController.clear)
 
 router
-  .route("/:userid/:bookid")
+  .route("/update/:id")
   .put(booksController.update)
   .delete(booksController.remove)
 

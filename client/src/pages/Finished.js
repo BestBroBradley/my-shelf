@@ -5,8 +5,8 @@ import { FinishedCard } from '../components/FinishedCard'
 import { BookshelfContext } from '../utils/BookshelfContext'
 
 export const Finished = () => {
-    const { library, emptyFinished } = useContext(BookshelfContext)
-    const finishedBooks = (library.books.filter(book => {
+    const { user, emptyFinished } = useContext(BookshelfContext)
+    const finishedBooks = (user.books.filter(book => {
         if ((book.isRead) === true) {
             return book
         }

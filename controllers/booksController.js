@@ -19,10 +19,11 @@ module.exports = {
         .catch(err => console.log(err))
     },
     update: function(req, res) {
-      Book
-        .findOneAndUpdate({_id: req.params.id}, {isRead: true})
-        .then(data => res.json(data))
-        .catch(err => console.log(err));
+      Book.findOneAndUpdate({_id: req.params.id}, {isRead: true})
+        .then(data => {
+          console.log(data)
+          res.json(data)})
+        .catch(err => console.log(err))
     },
     remove: function(req, res) {
       Book
@@ -33,11 +34,11 @@ module.exports = {
     },
     clear: function(req, res) {
       Book
-        .deleteMany({isRead: true})
+        .remove({userid: req.params.userid, isRead: true})
         .then(data => {
-          console.log(data)
-          res.json(data)})
+            console.log(data)
+            res.json(data)})
         .catch(err => console.log(err))
     }
-  };
+  }
   
