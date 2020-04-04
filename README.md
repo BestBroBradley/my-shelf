@@ -1,13 +1,12 @@
 # My Shelf
 
-This is an application that allows a book-loving user to search the Google Books API, save books that they're interested in reading, and then mark those books as complete once they've read them.
+This is an application that allows a book-loving user to create an account, then search the Google Books API, save books that they're interested in reading, and optionally mark those books as complete once they've read them.
 
-My Shelf is an MVC app that has a complete backend and the ability to do full CRUD operations within the database.
+My Shelf uses the MERN Stack, with a React front-end and a Mongo DB back-end.  It's an MVC app with full CRUD operations (creating a user and adding books to those user's profile, retrieving that user's information upon login, updating books to reflect whether they've been read or not, and removing books from the database if the user so chooses.)
 
 ![Bookshelf](%PUBLIC_URL%/images/library.png)
 
 ![Search]("%PUBLIC_URL%/images/search.png")
-
 
 ## Technologies Used
 
@@ -31,7 +30,8 @@ The database structure for this project is MongoDB and Mongoose was used to inte
 
 [https://mongoosejs.com/](https://mongoosejs.com/)
 
+Bcrypt
 
-## Future Improvements
+Bcrypt ensures that the user's password remains secure.
 
-In the future, My Shelf will have full authentication and will allow users to login to their library anywhere.
+[https://www.npmjs.com/package/bcryptjs](https://www.npmjs.com/package/bcryptjs)
