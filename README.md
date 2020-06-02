@@ -4,6 +4,8 @@ This is an application that allows a book-loving user to create an account, then
 
 My Shelf uses the MERN Stack, with a React front-end and a Mongo DB back-end.  It's an MVC app with full CRUD operations (creating a user and adding books to those user's profile, retrieving that user's information upon login, updating books to reflect whether they've been read or not, and removing books from the database if the user so chooses.
 
+[Link to deployed app](https://bbb-my-shelf.herokuapp.com/)
+
 ## Technologies Used
 
 React [https://reactjs.org/](https://reactjs.org/)
