@@ -2,11 +2,7 @@
 
 This is an application that allows a book-loving user to create an account, then search the Google Books API, save books that they're interested in reading, and optionally mark those books as complete once they've read them.
 
-My Shelf uses the MERN Stack, with a React front-end and a Mongo DB back-end.  It's an MVC app with full CRUD operations (creating a user and adding books to those user's profile, retrieving that user's information upon login, updating books to reflect whether they've been read or not, and removing books from the database if the user so chooses.)
-
-![Bookshelf](%PUBLIC_URL%/images/library.png)
-
-![Search](%PUBLIC_URL%/images/search.png)
+My Shelf uses the MERN Stack, with a React front-end and a Mongo DB back-end.  It's an MVC app with full CRUD operations (creating a user and adding books to those user's profile, retrieving that user's information upon login, updating books to reflect whether they've been read or not, and removing books from the database if the user so chooses.
 
 ## Technologies Used
 
