@@ -1,10 +1,14 @@
 # My Shelf
 
-This is an application that allows a book-loving user to create an account, then search the Google Books API, save books that they're interested in reading, and optionally mark those books as complete once they've read them.
+This is an application that allows a book-loving user to create an account, then search the Google Books API, save books that they're interested in reading, and optionally mark those books as complete once they've read them so that they can keep better track of which books they would like to read.
 
 My Shelf uses the MERN Stack, with a React front-end and a Mongo DB back-end.  It's an MVC app with full CRUD operations (creating a user and adding books to those user's profile, retrieving that user's information upon login, updating books to reflect whether they've been read or not, and removing books from the database if the user so chooses.
 
 [Link to deployed app](https://bbb-my-shelf.herokuapp.com/)
+
+Version 1.0
+
+Written in JavaScript
 
 ## Technologies Used
 
