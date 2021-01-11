@@ -14,7 +14,19 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/myshelf", { useNewUrlParser: true });
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/myshelf", { useNewUrlParser: true });
+
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/myshelf", {
+  useNewUrlParser:true
+    }).then(
+      () => { 
+          console.log("Database connected");
+      },
+      err => { 
+          /** handle initial connection error */ 
+          console.log("Error in database connection. ", err);
+      }
+  );
 
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
