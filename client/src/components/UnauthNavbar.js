@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export const UnauthNavbar = () => {
 
-    const [activeTab, setActiveTab] = useState("home")
+    const [activeTab, setActiveTab] = useState("welcome")
 
     const handleItemClick = (active) => {
         setActiveTab(active)
