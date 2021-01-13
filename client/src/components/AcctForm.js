@@ -52,7 +52,7 @@ export const AcctForm = (props) => {
                 passwordError: true,
                 usernameError: false,
                 emailError: false,
-                errorMessage: 'Password must include: 8-25 chars, A-Z, a-z, 0-9',
+                errorMessage: 'Password must include: 8-25 chars, A-Z, a-z & 0-9',
                 genError: true
             })
         } else if (!validEmail.test(formState.email)) {
