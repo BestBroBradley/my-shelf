@@ -77,6 +77,9 @@ export const SignIn = (props) => {
                             username: res.data.username,
                             loggedIn: true
                         })
+                        setTimeout(() => {
+                            props.props.history.push('/')
+                        }, 2000)
                     }
                 })
 

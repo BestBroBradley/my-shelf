@@ -7,7 +7,7 @@ export const AuthNavbar = (props) => {
     
     const { setUser } = useContext(BookshelfContext)
 
-    const [activeTab, setActiveTab] = useState("home")
+    const [activeTab, setActiveTab] = useState("bookshelf")
 
     const handleItemClick = (active) => {
         setActiveTab(active)
@@ -20,7 +20,7 @@ export const AuthNavbar = (props) => {
             username: "",
             id: ""
         })
-        console.log("logout")
+        alert("Successfully logged out!")
     }
 
     return (
